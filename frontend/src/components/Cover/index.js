@@ -66,6 +66,51 @@ export default class Cover extends Component {
         );
     }
 
+    showFullDetails() {
+      this.refs.fulldetails.removeAttribute('hidden');
+    }
+
+    hideFullDetails() {
+      this.refs.fulldetails.setAttribute('hidden', 'hidden')
+    }
+
+    renderFullDetails() {
+      return (
+        <div className="comic-details" hidden ref="fulldetails">
+          <button className="close-button" onClick={ this.hideFullDetails.bind(this) }>Close</button>
+          <h2>Full Details: { this.props.comicData.title }</h2>
+          <dl>
+            <dt>ISBN:</dt>
+            <dd>{  this.props.comicData.isbn ? this.props.comicData.isbn : 'not available' }</dd>
+
+            <dt>Variant Description:</dt>
+            <dd>{ this.props.comicData.variantDescription }</dd>
+
+            <dt>Characters:</dt>
+            <dd><ul>{ this.props.comicData.characters.items.map( (character) => {
+                return (
+                  <li>{ character.name }</li>
+                );
+            }) }</ul></dd>
+            <dt>Creators:</dt>
+            <dd><ul>{this.props.comicData.creators.items.map( (creator) => {
+              return (
+                <li>{ creator.name }</li>
+              );
+            }) }</ul></dd>
+            <dt>images:</dt>
+            <dd>{this.props.comicData.images.map( (image) => {
+              var uri = `${ image.path }/portrait_uncanny.${ image.extension }`;
+              return (
+                <img src={ uri } width="150" />
+              );
+            } )}</dd>
+        </dl>
+
+        </div>
+      );
+    }
+
     coverImage() {
       return `${this.props.comicData.thumbnail.path}/${this.state.image_size}.${this.props.comicData.thumbnail.extension}`;
     }
@@ -76,9 +121,12 @@ export default class Cover extends Component {
           onMouseEnter={ this.showDetails.bind(this, true) }
           onMouseLeave={ this.showDetails.bind(this, false) }>
           <div className="cover">
-            <img className="cover-image" alt={ this.props.comicData.title } src={ this.coverImage.call(this) } />
-            { this.renderDetail() }
+            <button className="cover-trigger" onClick={ this.showFullDetails.bind(this) }>
+              <img className="cover-image" alt={ this.props.comicData.title } src={ this.coverImage.call(this) } />
+              { this.renderDetail() }
+            </button>
             { this.coverUpvoted() }
+            { this.renderFullDetails() }
           </div>
         </div>
       );

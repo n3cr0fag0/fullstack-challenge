@@ -17,6 +17,14 @@
 
 }
 
+.cover-trigger {
+  border: 0;
+  padding: 0;
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+
 .cover-upvoted {
   top: 0;
   left: 0;
@@ -115,4 +123,41 @@
 .cover-heart {
   padding: 10px 10px 0 0;
   text-align: right;
+}
+
+.comic-details {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.96);
+  z-index: 10000;
+  text-align: left;
+  padding: 4%;
+  overflow: auto;
+}
+
+.comic-details dt {
+  font-weight: bold;
+}
+.comic-details dd {
+  margin: 0 0 1rem;
+}
+.comic-details ul {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.comic-details .close-button {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  background: #ED1227;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border: 0;
 }
