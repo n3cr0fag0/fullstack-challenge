@@ -51,15 +51,18 @@ export default class Cover extends Component {
       if (!this.state.mouseOver) { return null; }
 
       return (
-        <div className="cover-detail">
+        <div>
           <div className="cover-heart" onClick={ this.props.upVote.bind(this) }></div>
-          <div className="cover-footer">
-            <div className="cover-title">
-              { this.props.comicData.title }
-            </div>
-            <div>
-              <span className="cover-issue"># { this.props.comicData.issueNumber }</span>
-              <span className="cover-year">{ this.coverDate.call(this) }</span>
+          <div className="cover-detail">
+            <div className="cover-footer">
+              <div className="cover-title">
+                { this.props.comicData.title }
+              </div>
+              <button onClick={ this.showFullDetails.bind(this) }>more details</button>
+              <div>
+                <span className="cover-issue"># { this.props.comicData.issueNumber }</span>
+                <span className="cover-year">{ this.coverDate.call(this) }</span>
+              </div>
             </div>
           </div>
         </div>
@@ -121,10 +124,8 @@ export default class Cover extends Component {
           onMouseEnter={ this.showDetails.bind(this, true) }
           onMouseLeave={ this.showDetails.bind(this, false) }>
           <div className="cover">
-            <button className="cover-trigger" onClick={ this.showFullDetails.bind(this) }>
-              <img className="cover-image" alt={ this.props.comicData.title } src={ this.coverImage.call(this) } />
-              { this.renderDetail() }
-            </button>
+            <img className="cover-image" alt={ this.props.comicData.title } src={ this.coverImage.call(this) } />
+            { this.renderDetail() }
             { this.coverUpvoted() }
             { this.renderFullDetails() }
           </div>
